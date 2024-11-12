@@ -1,4 +1,4 @@
-package edu.utsa.cs3443.project;
+package edu.utsa.cs3443.project.model;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import edu.utsa.cs3443.project.R;
 
 public class TotalTasks extends AppCompatActivity {
 
