@@ -13,13 +13,13 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
-            android:name=".model.TaskView"
+            android:name=".ProgressView"
             android:exported="false" />
         <activity
-            android:name=".model.TotalTasks"
+            android:name=".TaskView"
             android:exported="false" />
         <activity
-            android:name=".model.CreateTask"
+            android:name=".CreateTask"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
