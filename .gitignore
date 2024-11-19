@@ -19,3 +19,6 @@ local.properties
 .idea/runConfigurations.xml
 gradle/libs.versions.toml
 gradle/wrapper/gradle-wrapper.properties
+.idea/runConfigurations.xml
+.idea/misc.xml
+.idea/compiler.xml
