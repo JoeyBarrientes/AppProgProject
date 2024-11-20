@@ -22,3 +22,5 @@ gradle/wrapper/gradle-wrapper.properties
 .idea/runConfigurations.xml
 .idea/misc.xml
 .idea/compiler.xml
+.idea/compiler.xml
+.idea/misc.xml
