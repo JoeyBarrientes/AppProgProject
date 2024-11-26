@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Project</string>
+    <string name="create_task">Create task</string>
+    <string name="progress_view">Progress view</string>
+    <string name="task_overview">Task overview</string>
+    <string name="calendar_homepage">Calendar Homepage</string>
 </resources>
