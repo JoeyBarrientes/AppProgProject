@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Project</string>
+    <string name="back">
+<![CDATA[ <- ]]>
+</string>
+    <string name="forward">
+<![CDATA[ -> ]]>
+</string>
 </resources>
