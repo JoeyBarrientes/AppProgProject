@@ -1,7 +1,10 @@
 package edu.utsa.cs3443.project.controller;
 
+import android.content.Context;
+
 import edu.utsa.cs3443.project.model.Task;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +71,20 @@ public class TaskController {
             }
         }
         return completed;
+    }
+
+    // Check user input for date it proper format (yyyy-mm-dd)
+    public static boolean isValidDateFormat(String date){
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
+
+    public static void writeTaskToCSV(Context context, String date, String description){
+        String filepath = context.getFilesDir().getPath() + "/tasks.csv";
+        try (FileWriter writer = new FileWriter(filepath, true)){
+            String lineToWrite = String.format("%s,%s,false", date, description);
+            writer.write(lineToWrite);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
