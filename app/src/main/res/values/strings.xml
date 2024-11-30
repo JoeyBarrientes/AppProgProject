@@ -10,4 +10,9 @@
     <string name="forward">
 <![CDATA[ -> ]]>
 </string>
+    <string-array name="sort_options">
+        <item>Default</item>
+        <item>Due Date</item>
+        <item>Task Name</item>
+    </string-array>
 </resources>

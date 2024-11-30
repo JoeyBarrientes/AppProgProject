@@ -36,7 +36,11 @@ public class TaskOverviewActivity extends AppCompatActivity {
         taskController = new TaskController();
         taskListView = findViewById(R.id.TaskOverviewActivity);
 
-        // Load and display all tasks
+
+//        List<Task> tasks = taskController.fetchTasks();
+//        TaskAdapter adapter = new TaskAdapter(this, tasks);
+//        taskListView.setAdapter(adapter);
+
         loadTasks();
     }
 

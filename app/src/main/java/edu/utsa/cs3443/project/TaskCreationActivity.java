@@ -22,7 +22,6 @@ public class TaskCreationActivity extends AppCompatActivity {
     private EditText dueDate;
     private EditText descriptionEdt;
     private Button createBtn;
-    private Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class TaskCreationActivity extends AppCompatActivity {
         dueDate = findViewById(R.id.dueDateEditor);
         descriptionEdt = findViewById(R.id.descriptionEditor);
         createBtn = findViewById(R.id.createBtn);
-        backBtn = findViewById(R.id.backBtn);
 
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,12 +70,5 @@ public class TaskCreationActivity extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TaskCreationActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

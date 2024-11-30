@@ -1,5 +1,6 @@
 package edu.utsa.cs3443.project;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,18 +33,23 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 		}
 
 		Task task = getItem(position);
+		TextView taskName = convertView.findViewById(R.id.taskName);
+		TextView taskDueDate = convertView.findViewById(R.id.taskDueDate);
 
-		TextView description = convertView.findViewById(R.id.taskDescription);
-//		CheckBox completed = convertView.findViewById(R.id.);
+		taskName.setText(task.getDescription());
+		taskDueDate.setText("Due: " + task.getDate());
 
-		description.setText(task.getDescription());
-//		completed.setChecked(task.getCompleted());
-
-//		completed.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//			task.setCompleted(isChecked);
-//			Toast.makeText(context, "Task marked as " + (isChecked ? "completed" : "incomplete"), Toast.LENGTH_SHORT).show();
-//		});
-
+		convertView.setOnClickListener(v -> showTaskDetails(task));
 		return convertView;
+	}
+
+	private void showTaskDetails(Task task) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(task.getDescription())
+				.setMessage("Due Date: " + task.getDate() +
+						"\nDescription: " + task.getDescription() +
+						"\nCompleted: " + (task.getCompleted() ? "Yes" : "No"))
+				.setPositiveButton("OK", null)
+				.show();
 	}
 }
