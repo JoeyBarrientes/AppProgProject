@@ -1,10 +1,12 @@
 package edu.utsa.cs3443.project;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.utsa.cs3443.project.controller.NavigationController;
 import edu.utsa.cs3443.project.controller.TaskController;
 import edu.utsa.cs3443.project.model.Task;
 
@@ -17,6 +19,17 @@ public class TaskProgressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_progress);
+
+        Button homeBtn = findViewById(R.id.homeButton);
+        Button overviewBtn = findViewById(R.id.overviewButton);
+        Button progressBtn = findViewById(R.id.progressButton);
+        Button createBtn = findViewById(R.id.createButton);
+        NavigationController navigationController = new NavigationController(this);
+
+        homeBtn.setOnClickListener(navigationController);
+        overviewBtn.setOnClickListener(navigationController);
+        progressBtn.setOnClickListener(navigationController);
+        createBtn.setOnClickListener(navigationController);
 
         // Initialize TaskController
         TaskController taskController = new TaskController();

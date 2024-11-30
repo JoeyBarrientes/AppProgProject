@@ -1,24 +1,56 @@
 package edu.utsa.cs3443.project;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.util.List;
+
+import edu.utsa.cs3443.project.controller.NavigationController;
+import edu.utsa.cs3443.project.controller.TaskController;
+import edu.utsa.cs3443.project.model.Task;
 
 public class TaskOverviewActivity extends AppCompatActivity {
+    private TaskController taskController;
+    private ListView taskListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_task_overview);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.TaskOverviewActivity), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        Button homeBtn = findViewById(R.id.homeButton);
+        Button overviewBtn = findViewById(R.id.overviewButton);
+        Button progressBtn = findViewById(R.id.progressButton);
+        Button createBtn = findViewById(R.id.createButton);
+        NavigationController navigationController = new NavigationController(this);
+
+        homeBtn.setOnClickListener(navigationController);
+        overviewBtn.setOnClickListener(navigationController);
+        progressBtn.setOnClickListener(navigationController);
+        createBtn.setOnClickListener(navigationController);
+
+        // Initialize the controller and views
+        taskController = new TaskController();
+        taskListView = findViewById(R.id.TaskOverviewActivity);
+
+
+//        List<Task> tasks = taskController.fetchTasks();
+//        TaskAdapter adapter = new TaskAdapter(this, tasks);
+//        taskListView.setAdapter(adapter);
+
+        loadTasks();
+    }
+
+    private void loadTasks() {
+        List<Task> tasks = taskController.fetchTasks();
+        displayTasks(tasks);
+    }
+
+    private void displayTasks(List<Task> tasks) {
+        TaskAdapter adapter = new TaskAdapter(this, tasks);
+        taskListView.setAdapter(adapter);
     }
 }

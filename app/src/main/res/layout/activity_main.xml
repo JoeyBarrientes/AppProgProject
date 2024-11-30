@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdf2e1"
+    android:background="@color/offWhite"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -175,60 +175,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
 
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/home_button_icon"
-        android:text="homepage"
-        android:textColor="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.461" />
+    <include
+        layout="@layout/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
-        android:id="@+id/overviewButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/view_button_icon"
-        android:text="@string/task_overview"
-        android:textColor="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.364"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <Button
-        android:id="@+id/progressButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/progress_button_icon"
-        android:text="@string/progress_view"
-        android:textColor="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.645"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.484" />
-
-    <Button
-    android:id="@+id/createButton"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:background="@drawable/create_button_icon"
-    android:text="@string/create_task"
-    android:textColor="@color/transparent"
-    app:layout_constraintBottom_toTopOf="@+id/guideline2"
-    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-    app:layout_constraintHorizontal_bias="0.957"
-    app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-    app:layout_constraintVertical_bias="0.484"/>
 
 
 

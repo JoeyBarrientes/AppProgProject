@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import edu.utsa.cs3443.project.controller.NavigationController;
 import edu.utsa.cs3443.project.controller.TaskController;
 
 public class TaskCreationActivity extends AppCompatActivity {
@@ -20,7 +22,6 @@ public class TaskCreationActivity extends AppCompatActivity {
     private EditText dueDate;
     private EditText descriptionEdt;
     private Button createBtn;
-    private Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,20 @@ public class TaskCreationActivity extends AppCompatActivity {
             return insets;
         });
 
+        Button homeBtn = findViewById(R.id.homeButton);
+        Button overviewBtn = findViewById(R.id.overviewButton);
+        Button progressBtn = findViewById(R.id.progressButton);
+        Button createBtn = findViewById(R.id.createButton);
+        NavigationController navigationController = new NavigationController(this);
+
+        homeBtn.setOnClickListener(navigationController);
+        overviewBtn.setOnClickListener(navigationController);
+        progressBtn.setOnClickListener(navigationController);
+        createBtn.setOnClickListener(navigationController);
+
         dueDate = findViewById(R.id.dueDateEditor);
         descriptionEdt = findViewById(R.id.descriptionEditor);
         createBtn = findViewById(R.id.createBtn);
-        backBtn = findViewById(R.id.backBtn);
 
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +70,5 @@ public class TaskCreationActivity extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TaskCreationActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
