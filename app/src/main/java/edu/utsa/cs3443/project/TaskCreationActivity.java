@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import edu.utsa.cs3443.project.controller.NavigationController;
 import edu.utsa.cs3443.project.controller.TaskController;
 
 public class TaskCreationActivity extends AppCompatActivity {
@@ -32,6 +34,17 @@ public class TaskCreationActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Button homeBtn = findViewById(R.id.homeButton);
+        Button overviewBtn = findViewById(R.id.overviewButton);
+        Button progressBtn = findViewById(R.id.progressButton);
+        Button createBtn = findViewById(R.id.createButton);
+        NavigationController navigationController = new NavigationController(this);
+
+        homeBtn.setOnClickListener(navigationController);
+        overviewBtn.setOnClickListener(navigationController);
+        progressBtn.setOnClickListener(navigationController);
+        createBtn.setOnClickListener(navigationController);
 
         dueDate = findViewById(R.id.dueDateEditor);
         descriptionEdt = findViewById(R.id.descriptionEditor);

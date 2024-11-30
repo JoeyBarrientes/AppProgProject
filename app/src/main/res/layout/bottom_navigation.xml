@@ -1,0 +1,73 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:gravity="center"
+    android:padding="8dp"
+    android:layout_gravity="bottom">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"/>
+
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/home_button_icon"
+        android:text=""
+        android:layout_marginHorizontal="8dp" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/overviewButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/view_button_icon"
+        android:text=""
+        android:layout_marginHorizontal="8dp" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/progressButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/progress_button_icon"
+        android:text=""
+        android:layout_marginHorizontal="8dp" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/create_button_icon"
+        android:text=""
+        android:layout_marginHorizontal="8dp" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"/>
+</LinearLayout>

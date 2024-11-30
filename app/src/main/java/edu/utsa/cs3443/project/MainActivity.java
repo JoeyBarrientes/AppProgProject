@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.utsa.cs3443.project.controller.HomepageController;
+import edu.utsa.cs3443.project.controller.NavigationController;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -48,13 +48,12 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         Button overviewBtn = findViewById(R.id.overviewButton);
         Button progressBtn = findViewById(R.id.progressButton);
         Button createBtn = findViewById(R.id.createButton);
-        // Create MainController and set it as the click listener for all buttons
-        // as to let the controller perform necessary input handling
-        HomepageController homepageController = new HomepageController(this);
-        homeBtn.setOnClickListener(homepageController);
-        overviewBtn.setOnClickListener(homepageController);
-        progressBtn.setOnClickListener(homepageController);
-        createBtn.setOnClickListener(homepageController);
+        NavigationController navigationController = new NavigationController(this);
+
+        homeBtn.setOnClickListener(navigationController);
+        overviewBtn.setOnClickListener(navigationController);
+        progressBtn.setOnClickListener(navigationController);
+        createBtn.setOnClickListener(navigationController);
     }
 
     private void initWidgets()
