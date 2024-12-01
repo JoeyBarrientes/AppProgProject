@@ -7,22 +7,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import edu.utsa.cs3443.project.controller.NavigationController;
 import edu.utsa.cs3443.project.controller.TaskController;
 
+/**
+ * TaskCreationActivity is an activity that allows users to create new tasks.
+ * Users can input a task name, due date, and save the task to a CSV file.
+ */
 public class TaskCreationActivity extends AppCompatActivity {
 
     private EditText dueDate;
     private EditText descriptionEdt;
     private Button createBtn;
 
+    /**
+     * Initializes the activity, sets up navigation, and handles task creation logic.
+     *
+     * @param savedInstanceState A saved state from a previous instance, if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

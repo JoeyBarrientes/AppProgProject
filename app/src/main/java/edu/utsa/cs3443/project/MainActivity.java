@@ -2,7 +2,6 @@ package edu.utsa.cs3443.project;
 
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -10,25 +9,30 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import edu.utsa.cs3443.project.controller.NavigationController;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * MainActivity is the app's main screen displaying a calendar view.
+ * Users can navigate between months and view selected dates.
+ */
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
+    /**
+     * Initializes the activity, sets up the calendar view, and configures navigation.
+     *
+     * @param savedInstanceState A saved state from a previous instance, if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,12 +60,18 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         createBtn.setOnClickListener(navigationController);
     }
 
+    /**
+     * Initializes widgets for the activity.
+     */
     private void initWidgets()
     {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
 
+    /**
+     * Sets up the calendar view for the selected month.
+     */
     private void setMonthView()
     {
         monthYearText.setText(monthYearFromDate(selectedDate));
@@ -73,6 +83,12 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    /**
+     * Generates a list of days for the selected month.
+     *
+     * @param date The selected date.
+     * @return An array list of days in the month.
+     */
     private ArrayList<String> daysInMonthArray(LocalDate date)
     {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
@@ -97,24 +113,46 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         return  daysInMonthArray;
     }
 
+    /**
+     * Formats a LocalDate to "MMMM yyyy".
+     *
+     * @param date The date to format.
+     * @return The formatted date string.
+     */
     private String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
     }
 
+    /**
+     * Displays the previous month's calendar.
+     *
+     * @param view The clicked view triggering the action.
+     */
     public void previousMonthAction(View view)
     {
         selectedDate = selectedDate.minusMonths(1);
         setMonthView();
     }
 
+    /**
+     * Displays the next month's calendar.
+     *
+     * @param view The clicked view triggering the action.
+     */
     public void nextMonthAction(View view)
     {
         selectedDate = selectedDate.plusMonths(1);
         setMonthView();
     }
 
+    /**
+     * Handles clicks on individual calendar days.
+     *
+     * @param position The position of the clicked day in the grid.
+     * @param dayText  The text of the clicked day.
+     */
     @Override
     public void onItemClick(int position, String dayText)
     {

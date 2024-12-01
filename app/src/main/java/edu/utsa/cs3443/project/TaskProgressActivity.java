@@ -3,23 +3,30 @@ package edu.utsa.cs3443.project;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import edu.utsa.cs3443.project.controller.NavigationController;
 import edu.utsa.cs3443.project.controller.TaskController;
 import edu.utsa.cs3443.project.model.Task;
-
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * TaskProgressActivity is an activity that displays progress bars for
+ * daily, monthly, and yearly task completion rates.
+ */
 public class TaskProgressActivity extends AppCompatActivity {
 
+    /**
+     * Initializes the activity, sets up navigation, and calculates task progress.
+     *
+     * @param savedInstanceState A saved state from a previous instance, if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_progress);
 
+        // Initializes the on screen buttons
         Button homeBtn = findViewById(R.id.homeButton);
         Button overviewBtn = findViewById(R.id.overviewButton);
         Button progressBtn = findViewById(R.id.progressButton);

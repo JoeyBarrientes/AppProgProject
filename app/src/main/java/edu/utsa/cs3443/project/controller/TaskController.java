@@ -2,9 +2,7 @@ package edu.utsa.cs3443.project.controller;
 
 import android.content.Context;
 import android.util.Log;
-
 import edu.utsa.cs3443.project.model.Task;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,11 +10,19 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskController manages task operations, including fetching tasks,
+ * filtering them by date, and updating or deleting tasks in the CSV file.
+ */
 public class TaskController {
 
     private final List<Task> taskList;
 
-    // Constructor to initialize or load tasks
+    /**
+     * Constructs a new TaskController and initializes tasks from the CSV file.
+     *
+     * @param context The application context for file operations.
+     */
     public TaskController(Context context) {
         taskList = new ArrayList<>();
         // Adding sample tasks for testing
@@ -29,12 +35,22 @@ public class TaskController {
         loadTasksFromCSV(context);
     }
 
-    // Fetch all tasks
+
+    /**
+     * Fetches all tasks from the CSV file.
+     *
+     * @return A list of all tasks.
+     */
     public List<Task> fetchTasks() {
         return taskList;
     }
 
-    // Filter tasks by a specific date
+    /**
+     * Filters tasks by a specific date.
+     *
+     * @param date The date to filter tasks by (format: yyyy-MM-dd).
+     * @return A list of tasks for the specified date.
+     */
     public List<Task> getTasksByDate(String date) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : taskList) {
@@ -45,7 +61,12 @@ public class TaskController {
         return filteredTasks;
     }
 
-    // Filter tasks by a specific month (e.g., "2024-11")
+    /**
+     * Filters tasks by a specific month.
+     *
+     * @param month The month to filter tasks by (format: yyyy-MM).
+     * @return A list of tasks for the specified month.
+     */
     public List<Task> getTasksByMonth(String month) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : taskList) {
@@ -56,7 +77,12 @@ public class TaskController {
         return filteredTasks;
     }
 
-    // Filter tasks by a specific year (e.g., "2024")
+    /**
+     * Filters tasks by a specific year.
+     *
+     * @param year The year to filter tasks by (format: yyyy).
+     * @return A list of tasks for the specified year.
+     */
     public List<Task> getTasksByYear(String year) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : taskList) {
@@ -78,11 +104,23 @@ public class TaskController {
         return completed;
     }
 
-    // Check user input for date it proper format (yyyy-mm-dd)
+    /**
+     * Checks if a date is in a valid format (yyyy-MM-dd).
+     *
+     * @param date The date string to validate.
+     * @return True if the date is valid, false otherwise.
+     */
     public static boolean isValidDateFormat(String date){
         return date.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
+    /**
+     * Writes a new task to the CSV file.
+     *
+     * @param context     The application context for file operations.
+     * @param date        The task's due date.
+     * @param description The task's description.
+     */
     public static void writeTaskToCSV(Context context, String date, String description){
         String filepath = context.getFilesDir().getPath() + "/tasks.csv";
         try (FileWriter writer = new FileWriter(filepath, true)){
@@ -92,6 +130,12 @@ public class TaskController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Loads all tasks from the CSV file.
+     *
+     * @param context     The application context for file operations.
+     */
     private void loadTasksFromCSV(Context context) {
         File csvFile = new File(context.getFilesDir(), "tasks.csv");
 
@@ -115,6 +159,13 @@ public class TaskController {
             Log.e("TaskController", "Error reading CSV file", e);
         }
     }
+
+    /**
+     * Deletes a task from the CSV file.
+     *
+     * @param context   The application context for file operations.
+     * @param taskToRemove The task to delete.
+     */
     public void deleteTask(Context context, Task taskToRemove) {
         File csvFile = new File(context.getFilesDir(), "tasks.csv");
         List<Task> updatedTasks = new ArrayList<>();
@@ -138,6 +189,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * Updates the completion status of a task in the CSV file.
+     *
+     * @param context   The application context for file operations.
+     * @param updatedTask The task to update.
+     */
     public void updateTaskCompletion(Context context, Task updatedTask) {
         File csvFile = new File(context.getFilesDir(), "tasks.csv");
         List<Task> updatedTasks = new ArrayList<>();
@@ -160,6 +217,4 @@ public class TaskController {
             Log.e("TaskController", "Error updating task completion in CSV", e);
         }
     }
-
-
 }
