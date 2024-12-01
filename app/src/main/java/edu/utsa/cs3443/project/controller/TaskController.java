@@ -81,7 +81,7 @@ public class TaskController {
     public static void writeTaskToCSV(Context context, String date, String description){
         String filepath = context.getFilesDir().getPath() + "/tasks.csv";
         try (FileWriter writer = new FileWriter(filepath, true)){
-            String lineToWrite = String.format("%s,%s,false", date, description);
+            String lineToWrite = String.format("%s,%s,false\n", date, description);
             writer.write(lineToWrite);
         } catch (Exception e){
             e.printStackTrace();
