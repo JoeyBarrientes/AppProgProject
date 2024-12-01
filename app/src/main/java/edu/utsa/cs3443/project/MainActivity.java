@@ -15,19 +15,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import edu.utsa.cs3443.project.controller.NavigationController;
+import edu.utsa.cs3443.project.controller.TaskController;
+import edu.utsa.cs3443.project.model.Task;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
+
+    private TaskController taskController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         overviewBtn.setOnClickListener(navigationController);
         progressBtn.setOnClickListener(navigationController);
         createBtn.setOnClickListener(navigationController);
+
+        taskController = new TaskController();
     }
 
     private void initWidgets()
@@ -115,15 +123,38 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+
+
     @Override
-    public void onItemClick(int position, String dayText)
-    {
-        if(!dayText.equals(""))
-        {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+    // Display AlertDialog with tasks for data when clicked on calendar
+    public void onItemClick(int position, String dayText) {
+        if (!dayText.equals("")) {
+
+            String monthYear = monthYearFromDate(selectedDate);
+            String month = monthYear.split(" ")[0]; // Gets month from string
+            String title = "Tasks for " + month + " " + dayText;
+            
+            List<Task> tasksForDay = taskController.fetchTasksForDate(dayText);
+
+            StringBuilder taskDetails = new StringBuilder();
+            taskDetails.append("Tasks for ").append(month).append(" ").append(dayText).append(":\n\n");
+            for (Task task : tasksForDay) {
+                taskDetails.append("• ").append(task.getDescription()).append("\n");
+            }
+
+            if (tasksForDay.isEmpty()) {
+                taskDetails.append("No tasks for this date.");
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(taskDetails.toString());
+            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+            builder.create().show();
         }
     }
+
+
 }
 
 

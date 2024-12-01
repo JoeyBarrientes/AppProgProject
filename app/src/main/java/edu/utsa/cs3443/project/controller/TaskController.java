@@ -87,4 +87,15 @@ public class TaskController {
             e.printStackTrace();
         }
     }
+
+    // Fetch all tasks on a specific date
+    public List<Task> fetchTasksForDate(String date) {
+        List<Task> tasksForDate = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDate().equals(date)) {
+                tasksForDate.add(task);
+            }
+        }
+        return tasksForDate;
+    }
 }
