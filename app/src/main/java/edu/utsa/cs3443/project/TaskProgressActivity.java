@@ -32,7 +32,7 @@ public class TaskProgressActivity extends AppCompatActivity {
         createBtn.setOnClickListener(navigationController);
 
         // Initialize TaskController
-        TaskController taskController = new TaskController();
+        TaskController taskController = new TaskController(this);
 
         // Dynamically get current date
         LocalDate currentDate = LocalDate.now();

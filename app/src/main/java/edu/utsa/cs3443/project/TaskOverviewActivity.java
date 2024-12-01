@@ -15,6 +15,7 @@ import edu.utsa.cs3443.project.model.Task;
 public class TaskOverviewActivity extends AppCompatActivity {
     private TaskController taskController;
     private ListView taskListView;
+    private TaskAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,10 @@ public class TaskOverviewActivity extends AppCompatActivity {
         progressBtn.setOnClickListener(navigationController);
         createBtn.setOnClickListener(navigationController);
 
+
+
         // Initialize the controller and views
-        taskController = new TaskController();
+        taskController = new TaskController(this);
         taskListView = findViewById(R.id.TaskOverviewActivity);
 
 
@@ -44,13 +47,37 @@ public class TaskOverviewActivity extends AppCompatActivity {
         loadTasks();
     }
 
+    /**
+     * Loads tasks from the TaskController and displays them in the ListView.
+     */
     private void loadTasks() {
         List<Task> tasks = taskController.fetchTasks();
         displayTasks(tasks);
     }
 
+    /**
+     * Displays a list of tasks in the ListView using the TaskAdapter.
+     *
+     * @param tasks List of tasks to display.
+     */
     private void displayTasks(List<Task> tasks) {
-        TaskAdapter adapter = new TaskAdapter(this, tasks);
+        adapter = new TaskAdapter(this, tasks);
         taskListView.setAdapter(adapter);
     }
+
+    /**
+     * Deletes a task and refreshes the ListView to reflect the changes.
+     *
+     * @param task The task to delete.
+     */
+    public void deleteTask(Task task) {
+        taskController.deleteTask(this, task);
+        loadTasks(); // Reload tasks after deletion
+    }
+
+    public void updateTaskCompletion(Task task) {
+        taskController.updateTaskCompletion(this, task);
+        loadTasks(); // Reload tasks to ensure updated list is displayed
+    }
+
 }

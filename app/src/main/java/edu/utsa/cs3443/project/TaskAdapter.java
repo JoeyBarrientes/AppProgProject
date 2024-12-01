@@ -35,9 +35,16 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 		Task task = getItem(position);
 		TextView taskName = convertView.findViewById(R.id.taskName);
 		TextView taskDueDate = convertView.findViewById(R.id.taskDueDate);
+		CheckBox completedCheckBox = convertView.findViewById(R.id.completedCheckBox);
 
 		taskName.setText(task.getDescription());
 		taskDueDate.setText("Due: " + task.getDate());
+		completedCheckBox.setChecked(task.getCompleted());
+
+		completedCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			task.setCompleted(isChecked);
+			((TaskOverviewActivity) context).updateTaskCompletion(task); // Update CSV
+		});
 
 		convertView.setOnClickListener(v -> showTaskDetails(task));
 		return convertView;
@@ -50,6 +57,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 						"\nDescription: " + task.getDescription() +
 						"\nCompleted: " + (task.getCompleted() ? "Yes" : "No"))
 				.setPositiveButton("OK", null)
+				.setNegativeButton("Delete", (dialog, which) -> {
+					// Call deleteTask method
+					((TaskOverviewActivity) context).deleteTask(task);
+				})
 				.show();
 	}
+
 }
