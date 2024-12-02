@@ -22,7 +22,7 @@ This calendar application is designed to help users manage tasks, events, and sc
 - Internet access is not required for the application to function.
 
 # Clone the repository:
-- git clone https://github.com/[Name]/ApplicationProg-Error404-TimelyCalendar.git
+- git clone https://github.com/JoeyBarrientes/ApplicationProg-Error404-TimelyCalendar.git
 - Or clone through the Code option at the top of the screen.
 - Open the project in Android Studio.
 - Sync Gradle and resolve dependencies.
