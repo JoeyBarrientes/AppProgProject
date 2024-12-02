@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * TaskProgressActivity displays the progress of task completion in the form of
  * daily, monthly, and yearly progress bars. It also includes motivational flavor
- * texts and animated progress updates for better user engagement.
+ * texts and animated progress updates for better aesthetics.
  */
 public class TaskProgressActivity extends AppCompatActivity {
 
