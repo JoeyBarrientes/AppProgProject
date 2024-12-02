@@ -1,5 +1,7 @@
 package edu.utsa.cs3443.project;
 
+import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.activity.EdgeToEdge;
@@ -11,12 +13,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.graphics.Paint;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 import edu.utsa.cs3443.project.controller.NavigationController;
+import edu.utsa.cs3443.project.controller.TaskController;
+import edu.utsa.cs3443.project.model.Task;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MainActivity is the app's main screen displaying a calendar view.
@@ -27,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
+    private TaskController taskController;
 
     /**
      * Initializes the activity, sets up the calendar view, and configures navigation.
@@ -58,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         overviewBtn.setOnClickListener(navigationController);
         progressBtn.setOnClickListener(navigationController);
         createBtn.setOnClickListener(navigationController);
+
+        taskController = new TaskController(this);
     }
 
     /**
@@ -154,15 +166,52 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
      * @param dayText  The text of the clicked day.
      */
     @Override
-    public void onItemClick(int position, String dayText)
-    {
-        if(!dayText.equals(""))
-        {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    public void onItemClick(int position, String dayText) {
+        if (!dayText.isEmpty()) {
+            LocalDate clickedDate = selectedDate.withDayOfMonth(Integer.parseInt(dayText));
+            String fullDate = clickedDate.toString();
+
+            List<Task> tasksForDay = taskController.getTasksByDate(fullDate);
+
+            // Inflate custom layout for the AlertDialog
+            View dialogView = getLayoutInflater().inflate(R.layout.alert_task_view, null);
+            LinearLayout taskContainer = dialogView.findViewById(R.id.taskContainer);
+
+            if (tasksForDay != null && !tasksForDay.isEmpty()) {
+                for (Task task : tasksForDay) {
+                    TextView taskTextView = new TextView(this);
+                    taskTextView.setText("• " + task.getDescription());
+                    taskTextView.setTextSize(16);
+
+                    if (task.getCompleted()) {
+                        // Apply strike-through effect for completed tasks
+                        taskTextView.setPaintFlags(taskTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        taskTextView.setTextColor(Color.GRAY); // Set text color for completed tasks
+                    } else {
+                        // Set default text color for incomplete tasks
+                        taskTextView.setTextColor(Color.BLACK);
+                    }
+
+                    taskContainer.addView(taskTextView); // Add TextView to the container
+                }
+            } else {
+                TextView noTasksTextView = new TextView(this);
+                noTasksTextView.setText("No tasks for this date.");
+                noTasksTextView.setTextSize(16);
+                noTasksTextView.setTextColor(Color.BLACK);
+                taskContainer.addView(noTasksTextView);
+            }
+
+            // Build and show the AlertDialog
+            new AlertDialog.Builder(this)
+                    .setTitle("Tasks for " + fullDate)
+                    .setView(dialogView) // Use custom layout
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
         }
     }
 }
+
 
 
 
