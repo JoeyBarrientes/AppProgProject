@@ -2,11 +2,11 @@
 # Team: Error 404
 
 # Team Members:
-Joey Barrientes
-Lmar Oria
-Matthieus Villarreal
-Alex Lacefield
-Nate Herrera
+- Joey Barrientes
+- Lmar Oria
+- Matthieus Villarreal
+- Alex Lacefield
+- Nate Herrera
 
 # Overview:
 This calendar application is designed to help users manage tasks, events, and schedules efficiently. The app provides features like task creation, tracking, and navigation between views for an organized daily experience.
@@ -23,6 +23,7 @@ This calendar application is designed to help users manage tasks, events, and sc
 
 # Clone the repository:
 - git clone https://github.com/[Name]/ApplicationProg-Error404-TimelyCalendar.git
+- Or clone through the Code option at the top of the screen.
 - Open the project in Android Studio.
 - Sync Gradle and resolve dependencies.
 - Connect an emulator or device.
