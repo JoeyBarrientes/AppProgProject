@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,15 +26,10 @@ public class TaskController {
      */
     public TaskController(Context context) {
         taskList = new ArrayList<>();
-        // Adding sample tasks for testing
-//        taskList.add(new Task("2024-11-27", "Complete project report", true));
-//        taskList.add(new Task("2024-11-27", "Prepare presentation", false));
-//        taskList.add(new Task("2024-11-15", "Submit homework", true));
-//        taskList.add(new Task("2024-11-01", "Start coding assignment", false));
-//        taskList.add(new Task("2024-10-20", "Draft research proposal", true));
-//        taskList.add(new Task("2024-01-15", "New Year resolution setup", true));
+        initializePredefinedTasks(context);
         loadTasksFromCSV(context);
     }
+
 
 
     /**
@@ -217,4 +213,37 @@ public class TaskController {
             Log.e("TaskController", "Error updating task completion in CSV", e);
         }
     }
+    /**
+     * Initializes predefined tasks in the CSV file if it is empty or the first time the app runs.
+     *
+     * @param context The application context for file operations.
+     */
+    private void initializePredefinedTasks(Context context) {
+        File csvFile = new File(context.getFilesDir(), "tasks.csv");
+
+        // Check if the file is empty
+        if (csvFile.length() == 0) {
+            writePredefinedTasksToCSV(context);
+        }
+    }
+
+    /**
+     * Writes a set of predefined tasks to the CSV file.
+     *
+     * @param context The application context for file operations.
+     */
+    private void writePredefinedTasksToCSV(Context context) {
+        try (FileWriter writer = new FileWriter(new File(context.getFilesDir(), "tasks.csv"), true)) {
+            // Predefined tasks
+            writer.write("2024-11-15,Complete project report,true\n");
+            writer.write("2024-11-27,Prepare presentation,true\n");
+            writer.write("2024-12-02,Start coding assignment,false\n");
+            writer.write("2024-12-06,Update resume,false\n");
+            writer.write("2024-12-25,Hello World!,true\n");
+        } catch (IOException e) {
+            Log.e("TaskController", "Error initializing predefined tasks", e);
+        }
+    }
+
+
 }
